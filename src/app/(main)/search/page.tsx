@@ -4,16 +4,17 @@ import { Recipe } from "@/types";
 
 
 type SearchPageProps = {
-  searchParams: {
+  searchParams: Promise<{
     q: string;
-  };
+  }>;
 };
 
 
 export const dynamic = "force-dynamic";
 
 
-export default async function SearchPage({ searchParams }: SearchPageProps) {
+export default async function SearchPage(props: SearchPageProps) {
+  const searchParams = await props.searchParams;
   const query = searchParams.q;
 
   if (!query) {

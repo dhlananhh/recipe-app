@@ -25,7 +25,13 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 
-export async function generateMetadata({ params: { id } }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const recipe = await getRecipeDetails(id);
   if (!recipe)
     return { title: "Recipe Not Found" };
@@ -65,7 +71,13 @@ async function checkIsSaved(recipeId: string): Promise<boolean> {
 }
 
 
-export default async function RecipeDetailPage({ params: { id } }: { params: { id: string } }) {
+export default async function RecipeDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const recipe = await getRecipeDetails(id);
 
   if (!recipe) {
@@ -114,7 +126,6 @@ export default async function RecipeDetailPage({ params: { id } }: { params: { i
           )
         }
       </section>
-
       <main className="lg:grid lg:grid-cols-3 lg:gap-12">
 
         <div className="lg:col-span-2 space-y-8">
