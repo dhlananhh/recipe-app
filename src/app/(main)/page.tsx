@@ -2,7 +2,7 @@ import { getRandomRecipes } from "@/lib/api";
 import { Recipe } from "@/types";
 import { RecipeCard } from "@/components/shared/RecipeCard";
 import { SearchBar } from "@/components/shared/SearchBar";
-import { BlurIn } from "@/components/magic/blur-in";
+import { BlurIn } from "@/components/magicui/blur-in";
 
 export default async function HomePage() {
   const featuredRecipes = await getRandomRecipes();
