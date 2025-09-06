@@ -16,6 +16,7 @@
         "clsx": "^2.1.1",
         "framer-motion": "^12.23.12",
         "localtunnel": "^2.0.2",
+        "lodash": "^4.17.21",
         "lucide-react": "^0.542.0",
         "magic-ui": "^0.1.0",
         "next": "15.5.2",
@@ -25,6 +26,7 @@
         "react-hook-form": "^7.62.0",
         "shadcn": "^3.2.1",
         "shadcn-remover": "^1.2.0",
+        "sharp": "^0.34.3",
         "sonner": "^2.0.7",
         "svix": "^1.76.1",
         "tailwind-merge": "^3.3.1",
@@ -5626,10 +5628,10 @@
       "sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw=="
     ],
     "lodash": [
-      "lodash@3.10.1",
+      "lodash@4.17.21",
       "",
       {},
-      "sha512-9mDDwqVIma6OZX79ZlDACZl8sBm0TEnkf99zV3iMA4GzkIT/9hiqP5mY0HoT1iNLCrKc/R1HByV+yJfRWVJryQ=="
+      "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
     ],
     "lodash.merge": [
       "lodash.merge@4.6.2",
@@ -8590,6 +8592,12 @@
         "bin": "bin/semver"
       },
       "sha512-IrpJ+yoG4EOH8DFWuVg+8H1kW1Oaof0Wxe7cPcXW3x9BjkN/eVo54F15LyqemnDIUYskQWr9qvl/RihmSy6+xQ=="
+    ],
+    "magic-ui/lodash": [
+      "lodash@3.10.1",
+      "",
+      {},
+      "sha512-9mDDwqVIma6OZX79ZlDACZl8sBm0TEnkf99zV3iMA4GzkIT/9hiqP5mY0HoT1iNLCrKc/R1HByV+yJfRWVJryQ=="
     ],
     "make-dir/semver": [
       "semver@5.7.2",
