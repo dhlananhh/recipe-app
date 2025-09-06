@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@next/codemod": "^15.5.2",
     "@prisma/client": "^6.15.0",
+    "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",

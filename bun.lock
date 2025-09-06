@@ -8,6 +8,7 @@
         "@hookform/resolvers": "^5.2.1",
         "@next/codemod": "^15.5.2",
         "@prisma/client": "^6.15.0",
+        "@radix-ui/colors": "^3.0.0",
         "@radix-ui/react-label": "^2.1.7",
         "@radix-ui/react-separator": "^1.1.7",
         "@radix-ui/react-slot": "^1.2.3",
@@ -1490,6 +1491,12 @@
         }
       },
       "sha512-Jbb+Xbxyp05NSR1x2epabetHiXvpO8tdN2YNoWoA/ZsbYyxxu/CO/ROBauIFuMXs3Ti+W7N7SJtWsHGaWte9Rg=="
+    ],
+    "@radix-ui/colors": [
+      "@radix-ui/colors@3.0.0",
+      "",
+      {},
+      "sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg=="
     ],
     "@radix-ui/react-compose-refs": [
       "@radix-ui/react-compose-refs@1.1.2",
