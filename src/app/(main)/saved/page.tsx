@@ -4,7 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { getRecipeDetails } from "@/lib/api";
 import { RecipeCard } from "@/components/shared/RecipeCard";
 import { Recipe } from "@/types";
-import { SavedRecipe } from "@/generated/prisma"
+import { SavedRecipe } from "@/generated/prisma";
+import { SearchX } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 
 export default async function SavedRecipesPage() {
@@ -35,21 +38,31 @@ export default async function SavedRecipesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {
               savedRecipes.map((recipe) => (
-                <RecipeCard key={ recipe.idMeal } recipe={ recipe } />
+                <RecipeCard
+                  key={ recipe.idMeal }
+                  recipe={ recipe }
+                />
               ))
             }
           </div>
         ) : (
-          <div className="text-center mt-10 border rounded-lg p-8">
-            <p className="text-xl font-semibold">
-              No recipes saved yet!
+          <div className="text-center mt-10 border-2 border-dashed rounded-lg p-12">
+            <SearchX className="mx-auto h-12 w-12 text-muted-foreground" />
+            <h3 className="mt-4 text-xl font-semibold">
+              No Saved Recipes Yet!
+            </h3>
+            <p className="mt-2 text-muted-foreground">
+              Looks like you haven't saved any recipes.
+              <br />
+              Start exploring and save the ones you love.
             </p>
-            <p className="text-muted-foreground mt-2">
-              Start exploring and save the meals you love.
-            </p>
+            <Button asChild className="mt-6">
+              <Link href="/">
+                Explore Recipes
+              </Link>
+            </Button>
           </div>
-        )
-      }
+        ) }
     </div>
-  );
+  )
 }
