@@ -72,3 +72,35 @@ export async function getRecipesByCategory(categoryName: string): Promise<Recipe
     return [];
   }
 }
+
+
+export async function getAllRecipes(): Promise<Recipe[]> {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  console.log("Starting to fetch all recipes...");
+
+  try {
+    const promises = alphabet.map(letter =>
+      fetch(`${API_BASE_URL_V1}/search.php?f=${letter}`).then(res => res.json())
+    );
+
+    const results = await Promise.all(promises);
+
+    const allMeals = results.flatMap(result => result.meals || []);
+
+    const uniqueMealsMap = new Map<string, Recipe>();
+    allMeals.forEach(meal => {
+      if (meal && meal.idMeal) {
+        uniqueMealsMap.set(meal.idMeal, meal);
+      }
+    });
+
+    const uniqueMeals = Array.from(uniqueMealsMap.values());
+
+    console.log(`Successfully fetched ${uniqueMeals.length} unique recipes.`);
+    return uniqueMeals;
+
+  } catch (error) {
+    console.error("Failed to fetch all recipes:", error);
+    return [];
+  }
+}
