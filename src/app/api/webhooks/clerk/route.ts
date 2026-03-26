@@ -4,6 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
+
 export async function POST(req: NextRequest) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
