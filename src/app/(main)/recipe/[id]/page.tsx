@@ -5,12 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  Youtube,
   Bookmark,
   Layers,
   MapPin,
   ChefHat
 } from "lucide-react";
+import { FaYoutube } from "react-icons/fa";
 import SaveRecipeButton from "@/components/shared/SaveRecipeButton";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
@@ -25,14 +25,17 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 
-export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const params = await props.params;
+type RecipePageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-  const {
-    id
-  } = params;
 
-  const recipe = await getRecipeDetails(id);
+export async function generateMetadata({ params }: RecipePageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const recipe = await getRecipeDetails(resolvedParams.id);
+
   if (!recipe)
     return { title: "Recipe Not Found" };
 
@@ -52,7 +55,10 @@ const getIngredients = (recipe: RecipeDetails): Ingredient[] => {
     const ingredientKey = `strIngredient${i}` as keyof RecipeDetails;
     const measureKey = `strMeasure${i}` as keyof RecipeDetails;
     if (recipe[ ingredientKey ]) {
-      ingredients.push({ name: recipe[ ingredientKey ]!, measure: recipe[ measureKey ] || "" });
+      ingredients.push({
+        name: recipe[ ingredientKey ]!,
+        measure: recipe[ measureKey ] || ""
+      });
     } else {
       break;
     }
@@ -71,14 +77,9 @@ async function checkIsSaved(recipeId: string): Promise<boolean> {
 }
 
 
-export default async function RecipeDetailPage(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
-
-  const {
-    id
-  } = params;
-
-  const recipe = await getRecipeDetails(id);
+export default async function RecipeDetailPage({ params }: RecipePageProps) {
+  const resolvedParams = await params;
+  const recipe = await getRecipeDetails(resolvedParams.id);
 
   if (!recipe) {
     notFound();
@@ -86,7 +87,7 @@ export default async function RecipeDetailPage(props: { params: Promise<{ id: st
 
   const [ ingredients, isSaved ] = await Promise.all([
     getIngredients(recipe),
-    checkIsSaved(id)
+    checkIsSaved(resolvedParams.id)
   ]);
 
   return (
@@ -109,6 +110,7 @@ export default async function RecipeDetailPage(props: { params: Promise<{ id: st
             </span>
           </div>
         </div>
+
         {
           recipe.strTags && (
             <div className="mt-4 flex flex-wrap gap-2">
@@ -126,8 +128,8 @@ export default async function RecipeDetailPage(props: { params: Promise<{ id: st
           )
         }
       </section>
-      <main className="lg:grid lg:grid-cols-3 lg:gap-12">
 
+      <main className="lg:grid lg:grid-cols-3 lg:gap-12">
         <div className="lg:col-span-2 space-y-8">
           <div className="relative aspect-video w-full">
             <Image
@@ -149,7 +151,8 @@ export default async function RecipeDetailPage(props: { params: Promise<{ id: st
               <ol className="list-decimal list-inside space-y-4 text-md leading-relaxed">
                 {
                   recipe.strInstructions
-                    .split(/\r?\n/).filter(line => line.trim() !== "")
+                    .split(/\r?\n/)
+                    .filter(line => line.trim() !== "")
                     .map((step, index) => (
                       <li key={ index }>{ step }</li>
                     ))
@@ -203,7 +206,7 @@ export default async function RecipeDetailPage(props: { params: Promise<{ id: st
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 text-white bg-red-600 hover:bg-red-700 font-semibold px-4 py-2 rounded-md transition-colors"
                 >
-                  <Youtube size={ 18 } />
+                  <FaYoutube size={ 18 } />
                   Watch Tutorial
                 </Link>
               )

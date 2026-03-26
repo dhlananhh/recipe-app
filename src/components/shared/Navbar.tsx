@@ -4,9 +4,7 @@
 import React from "react";
 import {
   SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
+  SignOutButton,
 } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -16,7 +14,7 @@ import { CookingPot } from "lucide-react";
 export function Navbar() {
   return (
     <header className="fixed top-0 inset-x-0 h-16 z-50 w-full border-b bg-background/95 backdrop-blur 
-    supports-[backdrop-filter]:bg-background/60">
+    supports-backdrop-filter:bg-background/60">
       <div className="container h-full max-w-7xl mx-auto flex items-center justify-between gap-4">
         <Link
           href="/"
@@ -35,14 +33,8 @@ export function Navbar() {
           >
             Saved Recipes
           </Link>
-          <SignedOut>
-            <SignInButton>
-              <Button>Sign In</Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          <SignInButton></SignInButton>
+          <SignOutButton></SignOutButton>
         </nav>
       </div>
     </header>
