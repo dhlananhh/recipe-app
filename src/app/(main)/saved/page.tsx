@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getRecipeDetails } from "@/lib/api";
 import { RecipeCard } from "@/components/shared/RecipeCard";
 import { Recipe } from "@/types";
-import { SavedRecipe } from "@/generated/prisma";
+import { SavedRecipe } from "@prisma/client";
 import { SearchX } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
