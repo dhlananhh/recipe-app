@@ -169,7 +169,7 @@ export default async function RecipeDetailPage({ params }: RecipePageProps) {
                 Ingredients
               </CardTitle>
               <CardDescription>
-                { ingredients.length } items
+                { ingredients.length } items (Click to find more)
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -178,11 +178,15 @@ export default async function RecipeDetailPage({ params }: RecipePageProps) {
                   ingredients.map((ing, index) => (
                     <li
                       key={ index }
-                      className="flex justify-between items-baseline pb-2 border-b last:border-none"
+                      className="flex justify-between items-baseline pb-2 border-b last:border-none group"
                     >
-                      <span className="font-medium">
+                      <Link
+                        href={ `/ingredients/${encodeURIComponent(ing.name.trim())}` }
+                        className="font-medium text-foreground hover:text-primary transition-colors underline-offset-4 group-hover:underline capitalize"
+                      >
                         { ing.name }
-                      </span>
+                      </Link>
+
                       <span className="text-sm text-muted-foreground text-right">
                         { ing.measure }
                       </span>

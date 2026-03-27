@@ -103,3 +103,16 @@ export async function getAllRecipes(): Promise<Recipe[]> {
     return [];
   }
 }
+
+
+export async function getRecipesByIngredient(ingredient: string): Promise<Recipe[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/filter.php?i=${ingredient}`);
+    if (!response.ok) throw new Error("Network response was not ok");
+    const data = await response.json();
+    return data.meals || [];
+  } catch (error) {
+    console.error(`Failed to get recipes for ingredient ${ingredient}:`, error);
+    return [];
+  }
+}
