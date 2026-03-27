@@ -116,3 +116,35 @@ export async function getRecipesByIngredient(ingredient: string): Promise<Recipe
     return [];
   }
 }
+
+
+/**
+ * Hàm TÌM KIẾM TỔNG HỢP: Vừa tìm theo Tên món, vừa tìm theo Nguyên liệu
+ * Sử dụng Promise.all để chạy 2 API song song và Map để loại bỏ kết quả trùng lặp.
+ */
+export async function searchRecipesAndIngredients(query: string): Promise<Recipe[]> {
+  try {
+    const [ recipesByName, recipesByIngredient ] = await Promise.all([
+      searchRecipes(query),
+      getRecipesByIngredient(query)
+    ]);
+
+    const combinedMeals = [ ...recipesByName, ...recipesByIngredient ];
+
+    const uniqueMealsMap = new Map<string, Recipe>();
+
+    combinedMeals.forEach(meal => {
+      if (meal && meal.idMeal) {
+        uniqueMealsMap.set(meal.idMeal, meal);
+      }
+    });
+
+    const uniqueMeals = Array.from(uniqueMealsMap.values());
+
+    return uniqueMeals;
+
+  } catch (error) {
+    console.error(`Failed to execute combined search for query "${query}":`, error);
+    return [];
+  }
+}
