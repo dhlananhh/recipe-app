@@ -23,6 +23,12 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 
 type RecipePageProps = {
@@ -99,15 +105,11 @@ export default async function RecipeDetailPage({ params }: RecipePageProps) {
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-muted-foreground">
           <div className="flex items-center gap-2">
             <MapPin size={ 16 } />
-            <span>
-              { recipe.strArea }
-            </span>
+            <span>{ recipe.strArea }</span>
           </div>
           <div className="flex items-center gap-2">
             <Layers size={ 16 } />
-            <span>
-              { recipe.strCategory }
-            </span>
+            <span>{ recipe.strCategory }</span>
           </div>
         </div>
 
@@ -169,7 +171,20 @@ export default async function RecipeDetailPage({ params }: RecipePageProps) {
                 Ingredients
               </CardTitle>
               <CardDescription>
-                { ingredients.length } items (Click to find more)
+                <div className="text-muted-foreground text-sm flex items-center pt-1">
+                  <TooltipProvider delayDuration={ 200 }>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="cursor-help border-b border-dashed border-muted-foreground/70 hover:text-foreground transition-colors pb-px">
+                          { ingredients.length } items
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">
+                        <p>Click on any ingredient below to find related recipes!</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
               </CardDescription>
             </CardHeader>
             <CardContent>
