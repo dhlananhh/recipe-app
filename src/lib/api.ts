@@ -5,13 +5,12 @@ import {
 } from "@/types";
 
 
-const API_BASE_URL_V2 = "https://www.themealdb.com/api/json/v2/9973533";
-const API_BASE_URL_V1 = "https://www.themealdb.com/api/json/v1/1";
+const API_BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
 
 
 export async function searchRecipes(query: string): Promise<Recipe[]> {
   try {
-    const response = await fetch(`${API_BASE_URL_V1}/search.php?s=${query}`);
+    const response = await fetch(`${API_BASE_URL}/search.php?s=${query}`);
     if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
     return data.meals || [];
@@ -24,7 +23,7 @@ export async function searchRecipes(query: string): Promise<Recipe[]> {
 
 export async function getRecipeDetails(id: string): Promise<RecipeDetails | null> {
   try {
-    const response = await fetch(`${API_BASE_URL_V1}/lookup.php?i=${id}`);
+    const response = await fetch(`${API_BASE_URL}/lookup.php?i=${id}`);
     if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
     return data.meals ? data.meals[ 0 ] : null;
@@ -37,7 +36,7 @@ export async function getRecipeDetails(id: string): Promise<RecipeDetails | null
 
 export async function getRandomRecipes(): Promise<Recipe[]> {
   try {
-    const response = await fetch(`${API_BASE_URL_V2}/randomselection.php`);
+    const response = await fetch(`${API_BASE_URL}/random.php`);
     if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
     return data.meals || [];
@@ -50,7 +49,7 @@ export async function getRandomRecipes(): Promise<Recipe[]> {
 
 export async function getAllCategories(): Promise<Category[]> {
   try {
-    const response = await fetch(`${API_BASE_URL_V1}/categories.php`);
+    const response = await fetch(`${API_BASE_URL}/categories.php`);
     if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
     return data.categories || [];
@@ -63,7 +62,7 @@ export async function getAllCategories(): Promise<Category[]> {
 
 export async function getRecipesByCategory(categoryName: string): Promise<Recipe[]> {
   try {
-    const response = await fetch(`${API_BASE_URL_V1}/filter.php?c=${categoryName}`);
+    const response = await fetch(`${API_BASE_URL}/filter.php?c=${categoryName}`);
     if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
     return data.meals || [];
@@ -80,7 +79,7 @@ export async function getAllRecipes(): Promise<Recipe[]> {
 
   try {
     const promises = alphabet.map(letter =>
-      fetch(`${API_BASE_URL_V1}/search.php?f=${letter}`).then(res => res.json())
+      fetch(`${API_BASE_URL}/search.php?f=${letter}`).then(res => res.json())
     );
 
     const results = await Promise.all(promises);
