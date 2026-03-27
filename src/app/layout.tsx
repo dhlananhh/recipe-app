@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
@@ -14,7 +14,7 @@ const lexend = Lexend({
 
 
 export const metadata: Metadata = {
-  title: "Culina - Your Culinary Companion",
+  title: "Culinary - Your Culinary Companion",
   description: "Discover, cook, and save amazing recipes from around the world.",
 };
 
