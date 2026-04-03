@@ -5,7 +5,7 @@ const path = require("path");
 const outputFile = "project_code.txt";
 
 // Các loại file cần gom
-const extensions = [".js", ".ts", ".tsx", ".json", ".css", ".prisma"];
+const extensions = [".js", ".ts", ".tsx", ".json", ".css", ".prisma", ".md"];
 
 // Các thư mục cần bỏ qua
 const ignoreDirs = ["node_modules", ".next", ".git"];
