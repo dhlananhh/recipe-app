@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://recipe-app-zeta-jet.vercel.app/
+
+# Sitemaps
+Sitemap: https://recipe-app-zeta-jet.vercel.app/sitemap.xml
